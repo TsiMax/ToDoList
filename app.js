@@ -135,14 +135,11 @@ app.get("/about", function(req, res){
 });
 
 
-const cool = require('cool-ascii-faces');
-const path = require('path');
-const PORT = process.env.PORT || 3000;
+let port = process.env.PORT;
+if(port==null||port==""){
+  port=3000;
+}
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .get('/cool', (req, res) => res.send(cool()))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(port, function(){
+  console.log("Server started succesfully");
+});
